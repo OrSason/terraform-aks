@@ -1,0 +1,15 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: goapp
+  namespace: "dev"
+spec:
+  type: NodePort
+  ports:
+  - name: "goapp-service"
+    port: 3000
+    targetPort: 3000
+  selector:
+    app: goapp
+

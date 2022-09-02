@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goapp
+  namespace: dev
+  labels:
+    app: goapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: goapp
+  template:
+    metadata:
+      labels:
+        app: goapp
+    spec:
+      containers:
+      - name: goapp
+        image: ors10.azurecr.io/goapp:v1
+        imagePullPolicy: "Always"

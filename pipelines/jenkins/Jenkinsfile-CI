@@ -1,0 +1,52 @@
+String registryCred = 'acrCred'
+
+pipeline {
+     agent {
+         label 'jenkins-terraform'
+        }
+
+     environment {
+    APP_PATH='sela-post-bootcamp/src/web-app/'
+    GIT_SRC='https://github.com/OrSason/sela-post-bootcamp.git'
+    REGISTRY_NAME='ors10'
+    registry = "ors10.azurecr.io/goapp"
+     }
+
+    stages {
+
+        stage('Building image') {
+          steps{
+            container('jenkins-agent') {
+               sh 'git clone $GIT_SRC'
+               sh '''
+               cd $APP_PATH
+               buildah bud -t $registry:${BUILD_NUMBER} .
+               '''
+          }
+      }
+    }
+  
+            stage('acr push') {
+            steps {
+                container('jenkins-agent') {
+
+               withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: registryCred, usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                sh 'buildah login -u $USERNAME -p $PASSWORD  $REGISTRY_NAME.azurecr.io' 
+                sh 'buildah push $registry:${BUILD_NUMBER}'                              
+              }
+
+            }
+        }
+    }
+   
+     
+    
+   /*
+      stage('Trigger cd job') {
+      steps{
+        build job: 'k8s-cd', propagate: true, wait: true
+      }
+    }
+    */                    
+    }
+}
