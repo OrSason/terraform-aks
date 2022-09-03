@@ -839,7 +839,7 @@ backup:
   # Supported cloud storage services: AWS S3, Minio S3, Azure Blob Storage, Google Cloud Storage
   # Additional support can added. Visit this repository for details
   # Ref: https://github.com/maorfr/skbn
-  destination: "abs://aksterra/jenkins-backup"
+  destination: "abs://aksterra3/jenkins-backup"
   # By enabling only the jenkins_home/jobs folder gets backed up, not the whole jenkins instance
   onlyJobs: true
   # Enable backup pod security context (must be `true` if runAsUser or fsGroup are set)

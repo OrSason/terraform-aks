@@ -14,7 +14,6 @@ resource "azurerm_container_registry" "acr" {
   depends_on               = [azurerm_resource_group.rg]
 }
 
-
 module "aks"{
 source                = "../tf-modules/aks"
 resourceGroupName     = var.resourceGroupName
@@ -29,7 +28,6 @@ ssh_key               = var.ssh_key
 serviceprinciple_id   = var.serviceprinciple_id
 serviceprinciple_key  = var.serviceprinciple_key
 
-
 depends_on            = [azurerm_resource_group.rg]
 }
 
@@ -37,7 +35,6 @@ module "ingress_nginx" {
   source                = "../tf-modules/ingress-nginx"
   env_np                = var.env_name
 }
-
 
 module "jenkins" {
   source                = "../tf-modules/jenkins"

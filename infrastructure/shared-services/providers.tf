@@ -9,7 +9,7 @@ terraform {
 
   backend "azurerm" {
     resource_group_name   = "Storage-rg"
-    storage_account_name  = "aksterra"
+    storage_account_name  = "aksterra3"
     container_name        = "tfstate-share"
     key                   = "terraform.tfstate"
   }
@@ -21,7 +21,6 @@ provider "azurerm" {
  client_id       = var.serviceprinciple_id
  client_secret   = var.serviceprinciple_key
  tenant_id       = var.tenant_id
-
 
   features {}
 }
@@ -36,7 +35,6 @@ provider "kubernetes" {
 }
 
 provider "helm" {
-  
     kubernetes {
     host                  = data.azurerm_kubernetes_cluster.cluster.kube_config.0.host
     client_certificate    = base64decode(data.azurerm_kubernetes_cluster.cluster.kube_config.0.client_certificate)
