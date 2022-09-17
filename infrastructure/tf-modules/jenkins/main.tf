@@ -6,7 +6,7 @@ resource "helm_release" "jenkins" {
   repository = "https://charts.jenkins.io"
   chart      = "jenkins"
    values = [
-   file("/helm-values/jenkins.yaml")
+   file("/helm-values/values-jenkins.yaml")
   ]
 
   set {

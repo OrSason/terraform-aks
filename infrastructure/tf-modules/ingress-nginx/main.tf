@@ -12,7 +12,7 @@ resource "helm_release" "nginx_ingress" {
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx-ingress-controller"
   values = [
-    file("helm-values/nginx-ingress.yaml")
+    file("helm-values/values.yaml")
   ]
   set {
     name  = "service.type"
